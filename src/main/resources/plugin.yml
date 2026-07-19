@@ -1,0 +1,8 @@
+name: MineCore
+description: $description
+version: '${version}'
+
+main: com.xycm.frain.minecore.MineCore
+api-version: '1.20'
+
+authors: [ Frain ]
