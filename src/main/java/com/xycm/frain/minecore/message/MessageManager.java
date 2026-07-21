@@ -74,6 +74,23 @@ public final class MessageManager {
         send(sender, key, "{player}", targetName);
     }
 
+    public static void sendGamemodeChanged(CommandSender sender, String modeName) {
+        send(sender, MessageConfig.getGamemodeChanged(), "{mode}", modeName);
+    }
+
+    public static void sendGamemodeOthers(CommandSender sender, String targetName, String modeName) {
+        send(sender, MessageConfig.getGamemodeOthers(), "{player}", targetName, "{mode}", modeName);
+    }
+
+    public static void sendVanishToggle(CommandSender sender, boolean enabled) {
+        send(sender, enabled ? MessageConfig.getVanishEnabled() : MessageConfig.getVanishDisabled());
+    }
+
+    public static void sendVanishToggleOthers(CommandSender sender, String targetName, boolean enabled) {
+        String key = enabled ? MessageConfig.getVanishEnabledOthers() : MessageConfig.getVanishDisabledOthers();
+        send(sender, key, "{player}", targetName);
+    }
+
     private static void send(CommandSender sender, String message) {
         if (message == null || message.isEmpty()) return;
         sender.sendMessage(ColorUtil.colorize(MessageConfig.getPrefix() + message));

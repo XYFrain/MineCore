@@ -13,6 +13,21 @@ commands:
     usage: /minecore <子命令>
 
 permissions:
+  minecore.teleport.back:
+    description: 允许使用 /minecore back 返回上一位置
+    default: op
+  minecore.teleport.spawn:
+    description: 允许使用 /minecore spawn 传送到出生点
+    default: op
+  minecore.player.tp:
+    description: 允许使用 /minecore tp 传送
+    default: op
+  minecore.player.vanish:
+    description: 允许使用 /minecore vanish 切换隐身模式
+    default: op
+  minecore.player.gamemode:
+    description: 允许使用 /minecore gamemode 切换游戏模式
+    default: op
   minecore.player.god:
     description: 允许使用 /minecore god 切换无敌模式
     default: op

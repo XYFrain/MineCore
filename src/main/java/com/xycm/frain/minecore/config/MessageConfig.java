@@ -120,4 +120,34 @@ public final class MessageConfig {
         return messages.getString("GodDisabledOthers");
     }
 
+    /** 游戏模式切换消息（原始值）。 */
+    public static String getGamemodeChanged() {
+        return messages.getString("GamemodeChanged");
+    }
+
+    /** 为他人切换游戏模式消息（原始值）。 */
+    public static String getGamemodeOthers() {
+        return messages.getString("GamemodeOthers");
+    }
+
+    /** 隐身开启消息（原始值）。 */
+    public static String getVanishEnabled() {
+        return messages.getString("VanishEnabled");
+    }
+
+    /** 隐身关闭消息（原始值）。 */
+    public static String getVanishDisabled() {
+        return messages.getString("VanishDisabled");
+    }
+
+    /** 为他人开启隐身消息（原始值）。 */
+    public static String getVanishEnabledOthers() {
+        return messages.getString("VanishEnabledOthers");
+    }
+
+    /** 为他人关闭隐身消息（原始值）。 */
+    public static String getVanishDisabledOthers() {
+        return messages.getString("VanishDisabledOthers");
+    }
+
 }
