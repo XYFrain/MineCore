@@ -1,8 +1,13 @@
 package com.xycm.frain.minecore.controller.command;
 
 import com.xycm.frain.minecore.controller.command.subcommand.player.FeedCommand;
+import com.xycm.frain.minecore.controller.command.subcommand.player.GamemodeCommand;
 import com.xycm.frain.minecore.controller.command.subcommand.player.GodCommand;
 import com.xycm.frain.minecore.controller.command.subcommand.player.FlyCommand;
+import com.xycm.frain.minecore.controller.command.subcommand.teleport.BackCommand;
+import com.xycm.frain.minecore.controller.command.subcommand.teleport.SpawnCommand;
+import com.xycm.frain.minecore.controller.command.subcommand.teleport.TpCommand;
+import com.xycm.frain.minecore.controller.command.subcommand.player.VanishCommand;
 import com.xycm.frain.minecore.controller.command.subcommand.player.SuicideCommand;
 import com.xycm.frain.minecore.controller.command.subcommand.player.HealCommand;
 import com.xycm.frain.minecore.controller.command.subcommand.player.HelpCommand;
@@ -28,8 +33,13 @@ public final class MainCommand implements TabExecutor {
     private final Map<String, SubCommand> subCommands = new HashMap<>();
 
     public MainCommand() {
+        subCommands.put("back", new BackCommand());
+        subCommands.put("spawn", new SpawnCommand());
+        subCommands.put("tp", new TpCommand());
+        subCommands.put("gamemode", new GamemodeCommand());
         subCommands.put("god", new GodCommand());
         subCommands.put("fly", new FlyCommand());
+        subCommands.put("vanish", new VanishCommand());
         subCommands.put("suicide", new SuicideCommand());
         subCommands.put("heal", new HealCommand());
         subCommands.put("feed", new FeedCommand());
@@ -65,11 +75,15 @@ public final class MainCommand implements TabExecutor {
                     .map(SubCommand::getName)
                     .collect(Collectors.toList());
         }
-        if (args.length == 2) {
+        if (args.length >= 2) {
             SubCommand sc = subCommands.get(args[0].toLowerCase());
-            if (sc != null && sc.supportsPlayerTarget()) {
+            if (sc == null) return List.of();
+
+            List<String> custom = sc.tabComplete(sender, args);
+            if (!custom.isEmpty()) return custom;
+
+            if (args.length == 2 && sc.supportsPlayerTarget()) {
                 return Bukkit.getOnlinePlayers().stream()
-                        .filter(p -> sender.hasPermission(sc.getPermission()))
                         .map(Player::getName)
                         .collect(Collectors.toList());
             }

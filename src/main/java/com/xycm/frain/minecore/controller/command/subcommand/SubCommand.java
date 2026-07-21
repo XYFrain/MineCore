@@ -2,6 +2,9 @@ package com.xycm.frain.minecore.controller.command.subcommand;
 
 import org.bukkit.command.CommandSender;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
  * 子命令接口，所有 /minecore <子命令> 都实现此接口。
  */
@@ -43,5 +46,15 @@ public interface SubCommand {
      */
     default boolean supportsPlayerTarget() {
         return false;
+    }
+
+    /**
+     * 自定义 Tab 补全。返回非空列表时直接使用，返回空列表时走默认逻辑。
+     *
+     * @param sender 命令发送者
+     * @param args   完整参数数组（含子命令名本身）
+     */
+    default List<String> tabComplete(CommandSender sender, String[] args) {
+        return Collections.emptyList();
     }
 }

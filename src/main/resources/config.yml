@@ -5,3 +5,12 @@
 
 # 语言 zh_CN / en_US
 Language: zh_CN
+
+# 全局出生点（/minecore setspawn 设置）
+spawn:
+  world: world
+  x: 0.5
+  y: 64.0
+  z: 0.5
+  yaw: 0.0
+  pitch: 0.0
