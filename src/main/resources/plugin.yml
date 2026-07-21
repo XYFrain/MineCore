@@ -6,3 +6,31 @@ main: com.xycm.frain.minecore.MineCore
 api-version: '1.20'
 
 authors: [ Frain ]
+
+commands:
+  MineCore:
+    description: MineCore 主命令
+    usage: /minecore <子命令>
+
+permissions:
+  minecore.player.god:
+    description: 允许使用 /minecore god 切换无敌模式
+    default: op
+  minecore.player.fly:
+    description: 允许使用 /minecore fly 切换飞行模式
+    default: op
+  minecore.player.suicide:
+    description: 允许使用 /minecore suicide 自杀
+    default: op
+  minecore.player.heal:
+    description: 允许使用 /minecore heal 恢复生命值
+    default: op
+  minecore.player.feed:
+    description: 允许使用 /minecore feed 恢复饱食度
+    default: op
+  minecore.player.help:
+    description: 允许查看帮助信息
+    default: op
+  minecore.admin.reload:
+    description: 允许重载 MineCore 配置与消息
+    default: op

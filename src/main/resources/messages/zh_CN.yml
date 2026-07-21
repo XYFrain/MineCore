@@ -1,0 +1,26 @@
+# MineCore 简体中文消息
+
+Prefix: "&8[&bMineCore&8] &r"
+
+ReloadSuccess: "&a插件配置已重载。"
+NoPermission: "&c你没有权限使用此功能。"
+PlayerOnly: "&c此命令只能由玩家使用。"
+InvalidArgument: "&c参数无效。"
+PlayerNotFound: "&c找不到玩家 {player}。"
+
+FeedSuccess: "&a饱食度已恢复。"
+FeedOthers: "&a已为 {player} 恢复饱食度。"
+
+HealSuccess: "&a生命值已恢复。"
+HealOthers: "&a已为 {player} 恢复生命值。"
+
+SuicideSuccess: "&a生存还是毁灭，这是个问题。"
+
+FlyEnabled: "&a飞行模式已开启。"
+FlyDisabled: "&a飞行模式已关闭。"
+FlyEnabledOthers: "&a已为 {player} 开启飞行模式。"
+FlyDisabledOthers: "&a已为 {player} 关闭飞行模式。"
+GodEnabled: "&a无敌模式已开启。"
+GodDisabled: "&a无敌模式已关闭。"
+GodEnabledOthers: "&a已为 {player} 开启无敌模式。"
+GodDisabledOthers: "&a已为 {player} 关闭无敌模式。"
