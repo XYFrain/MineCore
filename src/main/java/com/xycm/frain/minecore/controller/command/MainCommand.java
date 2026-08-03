@@ -90,4 +90,9 @@ public final class MainCommand implements TabExecutor {
         }
         return List.of();
     }
+
+    /** 供 {@link com.xycm.frain.minecore.util.CommandUtil} 获取子命令映射。 */
+    public Map<String, SubCommand> getSubCommands() {
+        return subCommands;
+    }
 }
