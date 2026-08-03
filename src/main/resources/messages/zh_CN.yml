@@ -7,6 +7,7 @@ NoPermission: "&c你没有权限使用此功能。"
 PlayerOnly: "&c此命令只能由玩家使用。"
 InvalidArgument: "&c参数无效。"
 PlayerNotFound: "&c找不到玩家 {player}。"
+BackNoLocation: "&c没有可返回的位置。"
 
 FeedSuccess: "&a饱食度已恢复。"
 FeedOthers: "&a已为 {player} 恢复饱食度。"
@@ -30,3 +31,21 @@ VanishEnabled: "&a隐身模式已开启。"
 VanishDisabled: "&a隐身模式已关闭。"
 VanishEnabledOthers: "&a已为 {player} 开启隐身模式。"
 VanishDisabledOthers: "&a已为 {player} 关闭隐身模式。"
+
+Usage: "&c用法：{usage}"
+
+HomeSet: "&a已设置家 {home}。"
+HomeDeleted: "&a已删除家 {home}。"
+HomeNotFound: "&c找不到家 {home}。"
+NoHomes: "&c你还没有设置家。"
+TeleportedToHome: "&a已传送到家 {home}。"
+
+WarpSet: "&a已创建传送点 {warp}。"
+WarpDeleted: "&a已删除传送点 {warp}。"
+WarpNotFound: "&c找不到传送点 {warp}。"
+NoWarps: "&c当前没有公共传送点。"
+TeleportedToWarp: "&a已传送到传送点 {warp}。"
+
+TpHereSuccess: "&a已将 {player} 传送到你身边。"
+
+KickSuccess: "&a已踢出 {player}。"

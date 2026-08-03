@@ -1,14 +1,15 @@
-package com.xycm.frain.minecore.controller.command.subcommand.player;
+package com.xycm.frain.minecore.controller.command.player;
 
-import com.xycm.frain.minecore.controller.command.subcommand.SubCommand;
+import com.xycm.frain.minecore.controller.command.SubCommand;
 import com.xycm.frain.minecore.util.ColorUtil;
-import com.xycm.frain.minecore.util.PermissionUtil;
 import org.bukkit.command.CommandSender;
 
 import java.util.Map;
 
 /**
- * /minecore help —— 显示所有子命令的帮助信息。
+ * /minecore help —— 显示有权限的子命令列表。
+ * <p>
+ * 按 PLAN 例外不建 service；不注册独立命令（保留原版 /help）。
  */
 public class HelpCommand implements SubCommand {
 
@@ -33,21 +34,23 @@ public class HelpCommand implements SubCommand {
         return "minecore.player.help";
     }
 
+    /** 不注册独立命令，保留原版 /help（修问题 #2）。 */
+    @Override
+    public boolean isStandalone() {
+        return false;
+    }
+
     @Override
     public boolean execute(CommandSender sender, String[] args) {
-        if (!PermissionUtil.check(sender, "minecore.player.help")) return true;
-
         sender.sendMessage(ColorUtil.colorize("&8&m---&r &bMineCore &8&m---"));
 
         for (SubCommand sub : subCommands.values()) {
             if (!sender.hasPermission(sub.getPermission())) {
                 continue;
             }
-
             String usage = sub.getUsage().isEmpty() ? "" : " " + sub.getUsage();
-            String desc = sub.getDescription() != null ? sub.getDescription() : "";
             sender.sendMessage(ColorUtil.colorize(
-                    " &7/minecore " + sub.getName() + usage + " &f- &r&f" + desc));
+                    " &7/minecore " + sub.getName() + usage + " &f- &r&f" + sub.getDescription()));
         }
         return true;
     }

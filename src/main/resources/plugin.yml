@@ -1,5 +1,4 @@
 name: MineCore
-description: $description
 version: '${version}'
 
 main: com.xycm.frain.minecore.MineCore
@@ -19,7 +18,7 @@ permissions:
   minecore.teleport.spawn:
     description: 允许使用 /minecore spawn 传送到出生点
     default: op
-  minecore.player.tp:
+  minecore.teleport.tp:
     description: 允许使用 /minecore tp 传送
     default: op
   minecore.player.vanish:
@@ -48,4 +47,16 @@ permissions:
     default: op
   minecore.admin.reload:
     description: 允许重载 MineCore 配置与消息
+    default: op
+  minecore.admin.kick:
+    description: 允许使用 /minecore kick 踢出玩家
+    default: op
+  minecore.teleport.home:
+    description: 允许使用 /minecore home/sethome/delhome
+    default: op
+  minecore.teleport.warp:
+    description: 允许使用 /minecore warp/setwarp/delwarp/warplist
+    default: op
+  minecore.teleport.tphere:
+    description: 允许使用 /minecore tphere 传送玩家
     default: op

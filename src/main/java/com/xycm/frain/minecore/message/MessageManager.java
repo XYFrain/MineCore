@@ -16,6 +16,17 @@ public final class MessageManager {
 
     private MessageManager() {}
 
+    /**
+     * 按 messages yml 的键名发送消息（键不存在或值为空时跳过）。
+     * 供 service 返回的 Result 翻译成消息时使用。
+     *
+     * @param placeholders 以「占位符, 值」成对传入，如 "{player}", "Steve"
+     */
+    public static void sendByKey(CommandSender sender, String messageKey, String... placeholders) {
+        if (messageKey == null) return;
+        send(sender, MessageConfig.get(messageKey, ""), placeholders);
+    }
+
     public static void sendReloadSuccess(CommandSender sender) {
         send(sender, MessageConfig.getReloadSuccess());
     }
@@ -89,6 +100,26 @@ public final class MessageManager {
     public static void sendVanishToggleOthers(CommandSender sender, String targetName, boolean enabled) {
         String key = enabled ? MessageConfig.getVanishEnabledOthers() : MessageConfig.getVanishDisabledOthers();
         send(sender, key, "{player}", targetName);
+    }
+
+    /** 发送 home 列表（/home 无参数、多家时）。 */
+    public static void sendHomeList(CommandSender sender, java.util.Set<String> names) {
+        String header = MessageConfig.getPrefix() + "&a你的家：";
+        sender.sendMessage(com.xycm.frain.minecore.util.ColorUtil.colorize(header));
+        for (String name : names) {
+            sender.sendMessage(com.xycm.frain.minecore.util.ColorUtil.colorize(
+                    MessageConfig.getPrefix() + "&7- &f" + name));
+        }
+    }
+
+    /** 发送 warp 列表。 */
+    public static void sendWarpList(CommandSender sender, java.util.Set<String> names) {
+        String header = MessageConfig.getPrefix() + "&a公共传送点：";
+        sender.sendMessage(com.xycm.frain.minecore.util.ColorUtil.colorize(header));
+        for (String name : names) {
+            sender.sendMessage(com.xycm.frain.minecore.util.ColorUtil.colorize(
+                    MessageConfig.getPrefix() + "&7- &f" + name));
+        }
     }
 
     private static void send(CommandSender sender, String message) {

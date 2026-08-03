@@ -43,13 +43,4 @@ public final class ColorUtil {
         return sb.toString();
     }
 
-    /**
-     * 去掉所有颜色符号，返回纯文本
-     */
-    public static String strip(String text) {
-        if (text == null || text.isEmpty()) {
-            return text;
-        }
-        return ChatColor.stripColor(text);
-    }
 }

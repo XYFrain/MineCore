@@ -1,13 +1,14 @@
-package com.xycm.frain.minecore.controller.command.subcommand.admin;
+package com.xycm.frain.minecore.controller.command.admin;
 
 import com.xycm.frain.minecore.config.ConfigManager;
-import com.xycm.frain.minecore.controller.command.subcommand.SubCommand;
+import com.xycm.frain.minecore.controller.command.SubCommand;
 import com.xycm.frain.minecore.message.MessageManager;
-import com.xycm.frain.minecore.util.PermissionUtil;
 import org.bukkit.command.CommandSender;
 
 /**
- * /minecore reload —— 重载配置与消息。
+ * /minecore reload（或 /reload）—— 重载配置与消息。
+ * <p>
+ * 按 PLAN 例外不建 service，直接调 ConfigManager。
  */
 public class ReloadCommand implements SubCommand {
 
@@ -28,7 +29,6 @@ public class ReloadCommand implements SubCommand {
 
     @Override
     public boolean execute(CommandSender sender, String[] args) {
-        if (!PermissionUtil.check(sender, "minecore.admin.reload")) return true;
         ConfigManager.reload();
         MessageManager.sendReloadSuccess(sender);
         return true;

@@ -1,97 +1,95 @@
 package com.xycm.frain.minecore.controller.command;
 
-import com.xycm.frain.minecore.controller.command.subcommand.player.FeedCommand;
-import com.xycm.frain.minecore.controller.command.subcommand.player.GamemodeCommand;
-import com.xycm.frain.minecore.controller.command.subcommand.player.GodCommand;
-import com.xycm.frain.minecore.controller.command.subcommand.player.FlyCommand;
-import com.xycm.frain.minecore.controller.command.subcommand.teleport.BackCommand;
-import com.xycm.frain.minecore.controller.command.subcommand.teleport.SpawnCommand;
-import com.xycm.frain.minecore.controller.command.subcommand.teleport.TpCommand;
-import com.xycm.frain.minecore.controller.command.subcommand.player.VanishCommand;
-import com.xycm.frain.minecore.controller.command.subcommand.player.SuicideCommand;
-import com.xycm.frain.minecore.controller.command.subcommand.player.HealCommand;
-import com.xycm.frain.minecore.controller.command.subcommand.player.HelpCommand;
-import com.xycm.frain.minecore.controller.command.subcommand.admin.ReloadCommand;
-import com.xycm.frain.minecore.controller.command.subcommand.SubCommand;
 import com.xycm.frain.minecore.message.MessageManager;
+import com.xycm.frain.minecore.util.PermissionUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * /minecore 主命令分发，通过 Map 查找子命令。
+ * /minecore 主命令分发器。
+ * <p>
+ * 职责：查子命令、统一查权限（修问题 #9 的提示一致性）、调 execute、做 Tab 补全。
+ * 子命令自身不再检查权限，保证 /minecore &lt;子命令&gt; 与独立命令两条路径行为一致。
  */
 public final class MainCommand implements TabExecutor {
 
-    private final Map<String, SubCommand> subCommands = new HashMap<>();
+    private final Map<String, SubCommand> subCommands;
 
-    public MainCommand() {
-        subCommands.put("back", new BackCommand());
-        subCommands.put("spawn", new SpawnCommand());
-        subCommands.put("tp", new TpCommand());
-        subCommands.put("gamemode", new GamemodeCommand());
-        subCommands.put("god", new GodCommand());
-        subCommands.put("fly", new FlyCommand());
-        subCommands.put("vanish", new VanishCommand());
-        subCommands.put("suicide", new SuicideCommand());
-        subCommands.put("heal", new HealCommand());
-        subCommands.put("feed", new FeedCommand());
-        subCommands.put("reload", new ReloadCommand());
-        subCommands.put("help", new HelpCommand(subCommands));
+    public MainCommand(Map<String, SubCommand> subCommands) {
+        this.subCommands = subCommands;
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 0) {
-            return subCommands.get("help").execute(sender, args);
+            // 无参数时等价于 help
+            SubCommand help = subCommands.get("help");
+            if (help == null) return true;
+            if (!PermissionUtil.check(sender, help.getPermission())) return true;
+            return help.execute(sender, args);
         }
 
-        String sub = args[0].toLowerCase();
-        String[] rest = args.length > 1
-                ? java.util.Arrays.copyOfRange(args, 1, args.length)
-                : new String[0];
-        SubCommand handler = subCommands.get(sub);
-
-        if (handler != null) {
-            handler.execute(sender, rest);
-        } else {
+        SubCommand handler = subCommands.get(args[0].toLowerCase(Locale.ROOT));
+        if (handler == null) {
             MessageManager.sendInvalidArgument(sender);
+            return true;
         }
-        return true;
+        if (!PermissionUtil.check(sender, handler.getPermission())) return true;
+
+        String[] rest = Arrays.copyOfRange(args, 1, args.length);
+        return handler.execute(sender, rest);
     }
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 1) {
+            // 补全子命令名：有权限的才列出，并按已输入前缀过滤（修问题 #6）
+            String prefix = args[0].toLowerCase(Locale.ROOT);
             return subCommands.values().stream()
                     .filter(sc -> sender.hasPermission(sc.getPermission()))
                     .map(SubCommand::getName)
+                    .filter(name -> name.startsWith(prefix))
+                    .sorted()
                     .collect(Collectors.toList());
         }
-        if (args.length >= 2) {
-            SubCommand sc = subCommands.get(args[0].toLowerCase());
-            if (sc == null) return List.of();
 
-            List<String> custom = sc.tabComplete(sender, args);
-            if (!custom.isEmpty()) return custom;
+        SubCommand handler = subCommands.get(args[0].toLowerCase(Locale.ROOT));
+        if (handler == null) return List.of();
+        return completeArgs(sender, handler, args);
+    }
 
-            if (args.length == 2 && sc.supportsPlayerTarget()) {
-                return Bukkit.getOnlinePlayers().stream()
-                        .map(Player::getName)
-                        .collect(Collectors.toList());
-            }
+    /**
+     * 补全子命令参数：先问子命令的自定义补全，为空则默认补在线玩家名。
+     * 独立命令包装器也复用此方法，保证两条路径补全一致（修问题 #1）。
+     *
+     * @param args 完整参数数组（含子命令名本身，args[0] 为子命令名）
+     */
+    public static List<String> completeArgs(CommandSender sender, SubCommand handler, String[] args) {
+        if (!sender.hasPermission(handler.getPermission())) return List.of();
+
+        List<String> custom = handler.tabComplete(sender, args);
+        if (!custom.isEmpty()) return custom;
+
+        // 第一个参数位：支持玩家目标时补全在线玩家名，按前缀过滤
+        if (args.length == 2 && handler.supportsPlayerTarget()) {
+            String prefix = args[1].toLowerCase(Locale.ROOT);
+            return Bukkit.getOnlinePlayers().stream()
+                    .map(Player::getName)
+                    .filter(name -> name.toLowerCase(Locale.ROOT).startsWith(prefix))
+                    .collect(Collectors.toList());
         }
         return List.of();
     }
 
-    /** 供 {@link com.xycm.frain.minecore.util.CommandUtil} 获取子命令映射。 */
     public Map<String, SubCommand> getSubCommands() {
         return subCommands;
     }

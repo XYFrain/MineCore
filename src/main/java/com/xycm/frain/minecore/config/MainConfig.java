@@ -51,16 +51,6 @@ public final class MainConfig {
         );
     }
 
-    /** 将玩家当前位置写入配置并保存。 */
-    public static void setSpawnLocation(Location loc) {
-        mainConfig.set("spawn.world", loc.getWorld().getName());
-        mainConfig.set("spawn.x", loc.getX());
-        mainConfig.set("spawn.y", loc.getY());
-        mainConfig.set("spawn.z", loc.getZ());
-        mainConfig.set("spawn.yaw", (double) loc.getYaw());
-        mainConfig.set("spawn.pitch", (double) loc.getPitch());
-    }
-
     /** 将配置写入文件。 */
     static void save(File file) throws IOException {
         mainConfig.save(file);
