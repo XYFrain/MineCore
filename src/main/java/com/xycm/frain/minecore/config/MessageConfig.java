@@ -1,153 +1,98 @@
 package com.xycm.frain.minecore.config;
 
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-
+import com.xycm.frain.minecore.MineCore;
+import org.spongepowered.configurate.ConfigurateException;
+import org.spongepowered.configurate.ConfigurationNode;
+import org.spongepowered.configurate.objectmapping.ConfigSerializable;
+import org.spongepowered.configurate.loader.HeaderMode;
+import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
+import lombok.Getter;
 import java.io.File;
 
-/**
- * messages/<语言>.yml 对应的配置类。
- * <p>
- * 纯读取 YAML，返回原始值，不做任何格式化或颜色处理。
- */
-public final class MessageConfig {
 
-    private static FileConfiguration messages;
+@ConfigSerializable
+@Getter
+public class MessageConfig {
 
+    @Getter
+    private static MessageConfig instance = new MessageConfig();
     private MessageConfig() {}
 
-    static void loadConfig(File file) {
-        messages = YamlConfiguration.loadConfiguration(file);
-    }
+    //------------------------------------------------------------------
+    // 前缀
+    private String prefix = "";
+    // 通用消息
+    private String reloadSuccess = "";
+    private String noPermission = "";
+    private String playerOnly = "";
+    private String invalidArgument = "";
+    private String playerNotFound = "";
+    private String backNoLocation = "";
+    // 治疗
+    private String healSuccess = "";
+    private String healOthers = "";
+    // 自杀
+    private String suicideSuccess = "";
+    // 飞行
+    private String flyEnabled = "";
+    private String flyDisabled = "";
+    private String flyEnabledOthers = "";
+    private String flyDisabledOthers = "";
+    // 无敌
+    private String godEnabled = "";
+    private String godDisabled = "";
+    private String godEnabledOthers = "";
+    private String godDisabledOthers = "";
+    // 游戏模式
+    private String gamemodeChanged = "";
+    private String gamemodeOthers = "";
+    private String modeSurvival = "";
+    private String modeCreative = "";
+    private String modeAdventure = "";
+    private String modeSpectator = "";
+    // 隐身
+    private String vanishEnabled = "";
+    private String vanishDisabled = "";
+    private String vanishEnabledOthers = "";
+    private String vanishDisabledOthers = "";
+    // 用法
+    private String usage = "";
+    // 家
+    private String homeSet = "";
+    private String homeDeleted = "";
+    private String homeNotFound = "";
+    private String noHomes = "";
+    private String teleportedToHome = "";
+    // 传送点
+    private String warpSet = "";
+    private String warpDeleted = "";
+    private String warpNotFound = "";
+    private String noWarps = "";
+    private String teleportedToWarp = "";
+    // 传送
+    private String tpHereSuccess = "";
+    private String spawnSuccess = "";
+    private String spawnOthers = "";
+    private String teleportNotice = "";
+    // 异常消息
+    private String exceptionUnknownCommand = "";
+    private String exceptionMissingArgument = "";
+    private String exceptionInvalidInteger = "";
+    private String exceptionInvalidDecimal = "";
+    private String exceptionCommandError = "";
+    //------------------------------------------------------------------
 
-    /** 通用取值，未配置时返回 {@code defaultValue}。 */
-    public static String get(String path, String defaultValue) {
-        return messages.getString(path, defaultValue);
+    public static void load(File file) {
+        try {
+            YamlConfigurationLoader loader = YamlConfigurationLoader.builder()
+                    .path(file.toPath())
+                    .headerMode(HeaderMode.PRESERVE)
+                    .build();
+            ConfigurationNode root = loader.load();
+            MessageConfig loaded = root.get(MessageConfig.class);
+            if (loaded != null) instance = loaded;
+        } catch (ConfigurateException e) {
+            MineCore.getInstance().getLogger().severe(e.getMessage());
+        }
     }
-
-    /** 获取消息前缀（原始字符串，含颜色码与占位符）。 */
-    public static String getPrefix() {
-        return messages.getString("Prefix", "");
-    }
-
-    /** 重载成功消息（原始值）。 */
-    public static String getReloadSuccess() {
-        return messages.getString("ReloadSuccess");
-    }
-
-    /** 无权限消息（原始值）。 */
-    public static String getNoPermission() {
-        return messages.getString("NoPermission");
-    }
-
-    /** 仅限玩家消息（原始值）。 */
-    public static String getPlayerOnly() {
-        return messages.getString("PlayerOnly");
-    }
-
-    /** 无效参数消息（原始值）。 */
-    public static String getInvalidArgument() {
-        return messages.getString("InvalidArgument");
-    }
-
-    /** 喂食成功消息（原始值）。 */
-    public static String getFeedSuccess() {
-        return messages.getString("FeedSuccess");
-    }
-
-    /** 治疗成功消息（原始值）。 */
-    public static String getHealSuccess() {
-        return messages.getString("HealSuccess");
-    }
-
-    /** 自杀成功消息（原始值）。 */
-    public static String getSuicideSuccess() {
-        return messages.getString("SuicideSuccess");
-    }
-
-    /** 飞行开启消息（原始值）。 */
-    public static String getFlyEnabled() {
-        return messages.getString("FlyEnabled");
-    }
-
-    /** 飞行关闭消息（原始值）。 */
-    public static String getFlyDisabled() {
-        return messages.getString("FlyDisabled");
-    }
-
-    /** 找不到玩家消息（原始值）。 */
-    public static String getPlayerNotFound() {
-        return messages.getString("PlayerNotFound");
-    }
-
-    /** 为他人喂食消息（原始值）。 */
-    public static String getFeedOthers() {
-        return messages.getString("FeedOthers");
-    }
-
-    /** 为他人治疗消息（原始值）。 */
-    public static String getHealOthers() {
-        return messages.getString("HealOthers");
-    }
-
-    /** 为他人开启飞行消息（原始值）。 */
-    public static String getFlyEnabledOthers() {
-        return messages.getString("FlyEnabledOthers");
-    }
-
-    /** 为他人关闭飞行消息（原始值）。 */
-    public static String getFlyDisabledOthers() {
-        return messages.getString("FlyDisabledOthers");
-    }
-
-    /** 无敌开启消息（原始值）。 */
-    public static String getGodEnabled() {
-        return messages.getString("GodEnabled");
-    }
-
-    /** 无敌关闭消息（原始值）。 */
-    public static String getGodDisabled() {
-        return messages.getString("GodDisabled");
-    }
-
-    /** 为他人开启无敌消息（原始值）。 */
-    public static String getGodEnabledOthers() {
-        return messages.getString("GodEnabledOthers");
-    }
-
-    /** 为他人关闭无敌消息（原始值）。 */
-    public static String getGodDisabledOthers() {
-        return messages.getString("GodDisabledOthers");
-    }
-
-    /** 游戏模式切换消息（原始值）。 */
-    public static String getGamemodeChanged() {
-        return messages.getString("GamemodeChanged");
-    }
-
-    /** 为他人切换游戏模式消息（原始值）。 */
-    public static String getGamemodeOthers() {
-        return messages.getString("GamemodeOthers");
-    }
-
-    /** 隐身开启消息（原始值）。 */
-    public static String getVanishEnabled() {
-        return messages.getString("VanishEnabled");
-    }
-
-    /** 隐身关闭消息（原始值）。 */
-    public static String getVanishDisabled() {
-        return messages.getString("VanishDisabled");
-    }
-
-    /** 为他人开启隐身消息（原始值）。 */
-    public static String getVanishEnabledOthers() {
-        return messages.getString("VanishEnabledOthers");
-    }
-
-    /** 为他人关闭隐身消息（原始值）。 */
-    public static String getVanishDisabledOthers() {
-        return messages.getString("VanishDisabledOthers");
-    }
-
 }

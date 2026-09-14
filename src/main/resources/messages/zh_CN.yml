@@ -1,51 +1,76 @@
 # MineCore 简体中文消息
+# 支持 MiniMessage 格式（<颜色>）和 {placeholder} 占位符
 
-Prefix: "&8[&bMineCore&8] &r"
+# 消息前缀
+prefix: "<gold>[MineCore]</gold> "
 
-ReloadSuccess: "&a插件配置已重载。"
-NoPermission: "&c你没有权限使用此功能。"
-PlayerOnly: "&c此命令只能由玩家使用。"
-InvalidArgument: "&c参数无效。"
-PlayerNotFound: "&c找不到玩家 {player}。"
-BackNoLocation: "&c没有可返回的位置。"
+# 通用消息
+reload-success: "<green>配置重载成功"
+no-permission: "<red>你没有权限执行此命令"
+player-only: "<red>此命令只能由玩家使用"
+invalid-argument: "<red>参数无效"
+player-not-found: "<red>找不到玩家 {player}"
+back-no-location: "<red>没有可返回的位置"
 
-FeedSuccess: "&a饱食度已恢复。"
-FeedOthers: "&a已为 {player} 恢复饱食度。"
+# 治疗
+heal-success: "<green>生命值已恢复"
+heal-others: "<green>已为 {player} 恢复生命值"
 
-HealSuccess: "&a生命值已恢复。"
-HealOthers: "&a已为 {player} 恢复生命值。"
+# 自杀
+suicide-success: "<red>你自杀了"
 
-SuicideSuccess: "&a生存还是毁灭，这是个问题。"
+# 飞行
+fly-enabled: "<green>飞行模式已开启"
+fly-disabled: "<red>飞行模式已关闭"
+fly-enabled-others: "<green>已为 {player} 开启飞行模式"
+fly-disabled-others: "<red>已为 {player} 关闭飞行模式"
 
-FlyEnabled: "&a飞行模式已开启。"
-FlyDisabled: "&a飞行模式已关闭。"
-FlyEnabledOthers: "&a已为 {player} 开启飞行模式。"
-FlyDisabledOthers: "&a已为 {player} 关闭飞行模式。"
-GodEnabled: "&a无敌模式已开启。"
-GodDisabled: "&a无敌模式已关闭。"
-GodEnabledOthers: "&a已为 {player} 开启无敌模式。"
-GodDisabledOthers: "&a已为 {player} 关闭无敌模式。"
-GamemodeChanged: "&a游戏模式已切换为 {mode}。"
-GamemodeOthers: "&a已将 {player} 的游戏模式设为 {mode}。"
-VanishEnabled: "&a隐身模式已开启。"
-VanishDisabled: "&a隐身模式已关闭。"
-VanishEnabledOthers: "&a已为 {player} 开启隐身模式。"
-VanishDisabledOthers: "&a已为 {player} 关闭隐身模式。"
+# 无敌
+god-enabled: "<green>无敌模式已开启"
+god-disabled: "<red>无敌模式已关闭"
+god-enabled-others: "<green>已为 {player} 开启无敌模式"
+god-disabled-others: "<red>已为 {player} 关闭无敌模式"
 
-Usage: "&c用法：{usage}"
+# 游戏模式
+gamemode-changed: "<green>游戏模式已切换为 {mode}"
+gamemode-others: "<green>已将 {player} 的游戏模式设为 {mode}"
+mode-survival: "生存模式"
+mode-creative: "创造模式"
+mode-adventure: "冒险模式"
+mode-spectator: "旁观模式"
 
-HomeSet: "&a已设置家 {home}。"
-HomeDeleted: "&a已删除家 {home}。"
-HomeNotFound: "&c找不到家 {home}。"
-NoHomes: "&c你还没有设置家。"
-TeleportedToHome: "&a已传送到家 {home}。"
+# 隐身
+vanish-enabled: "<green>隐身模式已开启"
+vanish-disabled: "<red>隐身模式已关闭"
+vanish-enabled-others: "<green>已为 {player} 开启隐身模式"
+vanish-disabled-others: "<red>已为 {player} 关闭隐身模式"
 
-WarpSet: "&a已创建传送点 {warp}。"
-WarpDeleted: "&a已删除传送点 {warp}。"
-WarpNotFound: "&c找不到传送点 {warp}。"
-NoWarps: "&c当前没有公共传送点。"
-TeleportedToWarp: "&a已传送到传送点 {warp}。"
+# 用法
+usage: "<red>用法：{usage}"
 
-TpHereSuccess: "&a已将 {player} 传送到你身边。"
+# 家
+home-set: "<green>已设置家 {home}"
+home-deleted: "<green>已删除家 {home}"
+home-not-found: "<red>找不到家 {home}"
+no-homes: "<red>你还没有设置家"
+teleported-to-home: "<green>已传送到家 {home}"
 
-KickSuccess: "&a已踢出 {player}。"
+# 传送点
+warp-set: "<green>已创建传送点 {warp}"
+warp-deleted: "<green>已删除传送点 {warp}"
+warp-not-found: "<red>找不到传送点 {warp}"
+no-warps: "<red>当前没有公共传送点"
+teleported-to-warp: "<green>已传送到传送点 {warp}"
+
+# 传送
+tphere-success: "<green>已将 {player} 传送到你身边"
+spawn-success: "<green>已传送到出生点"
+spawn-others: "<green>已将 {player} 传送到出生点"
+teleport-notice: "<green>你被传送到了 {x}, {y}, {z}"
+
+# Lamp 异常消息
+exception-unknown-command: "<red>未知命令，输入 <yellow>/minecore</yellow> 查看帮助"
+exception-missing-argument: "<red>缺少参数: <yellow>{param}</yellow>"
+exception-invalid-integer: "<red>需要一个整数，收到: <yellow>{input}</yellow>"
+exception-invalid-decimal: "<red>需要一个小数，收到: <yellow>{input}</yellow>"
+exception-command-error: "<red>命令执行出错: <yellow>{error}</yellow>"

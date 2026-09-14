@@ -4,7 +4,7 @@
 # ==================================================
 
 # 语言（当前仅支持 zh_CN）
-Language: zh_CN
+language: zh_CN
 
 # 全局出生点（手动编辑本文件设置，修改后 /minecore reload 生效）
 spawn:
