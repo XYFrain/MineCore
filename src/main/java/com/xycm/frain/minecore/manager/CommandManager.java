@@ -17,13 +17,12 @@ import java.util.List;
 @UtilityClass
 public class CommandManager {
 
-
-    private static final List<String> SHORTCUTS = List.of(
+    private final List<String> SHORTCUTS = List.of(
             "fly", "god", "heal", "suicide", "gamemode", "vanish", "back",
             "home", "sethome", "delhome", "warp", "setwarp", "delwarp",
             "warplist", "spawn", "tphere");
 
-    public static void register() {
+    public void register() {
         Lamp<BukkitCommandActor> commandFramework = BukkitLamp.builder(MineCore.getInstance())
                 .exceptionHandler(ExceptionHandler.instance)
                 .build();
@@ -32,8 +31,7 @@ public class CommandManager {
         registerShortcuts();
     }
 
-
-    private static void registerShortcuts() {
+    private void registerShortcuts() {
         CommandMap commandMap = Bukkit.getCommandMap();
         Command minecore = commandMap.getCommand("minecore");
         if (minecore == null) return;

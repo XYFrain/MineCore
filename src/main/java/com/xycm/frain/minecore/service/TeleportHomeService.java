@@ -13,7 +13,7 @@ import java.util.UUID;
 public class TeleportHomeService {
 
 
-    public static void teleport(Player player, String name) {
+    public void teleport(Player player, String name) {
         UUID uuid = player.getUniqueId();
         if (name == null) {
             // 无参数
@@ -44,12 +44,12 @@ public class TeleportHomeService {
         MessageService.send(player, MessageConfig.getInstance().getTeleportedToHome(), "{home}", name);
     }
 
-    public static void create(Player player, String name) {
+    public void create(Player player, String name) {
         DataManager.setHome(player.getUniqueId(), name, player.getLocation());
         MessageService.send(player, MessageConfig.getInstance().getHomeSet(), "{home}", name);
     }
 
-    public static void delete(Player player, String name) {
+    public void delete(Player player, String name) {
         if (!DataManager.hasHome(player.getUniqueId(), name)) {
             MessageService.send(player, MessageConfig.getInstance().getHomeNotFound(), "{home}", name);
             return;

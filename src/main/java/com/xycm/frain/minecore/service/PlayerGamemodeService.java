@@ -12,7 +12,7 @@ import java.util.Locale;
 @UtilityClass
 public class PlayerGamemodeService {
 
-    public static void change(CommandSender sender, String gamemode, String target) {
+    public void change(CommandSender sender, String gamemode, String target) {
         GameMode resolved = switch (gamemode.toLowerCase(Locale.ROOT)) {
             case "survival", "0" -> GameMode.SURVIVAL;
             case "creative", "1" -> GameMode.CREATIVE;
@@ -46,12 +46,12 @@ public class PlayerGamemodeService {
         }
     }
 
-    private static void changeSelf(Player player, GameMode gamemode, String gamemodeName) {
+    private void changeSelf(Player player, GameMode gamemode, String gamemodeName) {
         player.setGameMode(gamemode);
         MessageService.send(player, MessageConfig.getInstance().getGamemodeChanged(), "{mode}", gamemodeName);
     }
 
-    private static void changeOther(CommandSender sender, Player player, GameMode gamemode, String gamemodeName) {
+    private void changeOther(CommandSender sender, Player player, GameMode gamemode, String gamemodeName) {
         player.setGameMode(gamemode);
         MessageService.send(sender, MessageConfig.getInstance().getGamemodeOthers(), "{player}", player.getName(), "{mode}", gamemodeName);
     }

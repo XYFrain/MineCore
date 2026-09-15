@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 @UtilityClass
 public class MessageService {
 
-    public static void send(CommandSender sender, String message, String... replacements) {
+    public void send(CommandSender sender, String message, String... replacements) {
         if (message.isEmpty()) return;
         for (int i = 0; i < replacements.length - 1; i += 2) {
             message = message.replace(replacements[i], replacements[i + 1]);

@@ -11,7 +11,7 @@ import java.util.List;
 @UtilityClass
 public class TeleportWarpService {
 
-    public static void teleport(Player player, String name) {
+    public void teleport(Player player, String name) {
         if (name == null) {
             list(player);
             return;
@@ -24,12 +24,12 @@ public class TeleportWarpService {
         MessageService.send(player, MessageConfig.getInstance().getTeleportedToWarp(), "{warp}", name);
     }
 
-    public static void create(Player player, String name) {
+    public void create(Player player, String name) {
         DataManager.setWarp(name, player.getLocation());
         MessageService.send(player, MessageConfig.getInstance().getWarpSet(), "{warp}", name);
     }
 
-    public static void delete(CommandSender sender, String name) {
+    public void delete(CommandSender sender, String name) {
         if (!DataManager.hasWarp(name)) {
             MessageService.send(sender, MessageConfig.getInstance().getWarpNotFound(), "{warp}", name);
             return;
@@ -38,7 +38,7 @@ public class TeleportWarpService {
         MessageService.send(sender, MessageConfig.getInstance().getWarpDeleted(), "{warp}", name);
     }
 
-    public static void list(CommandSender sender) {
+    public void list(CommandSender sender) {
         List<String> names = DataManager.getAllWarps();
         if (names.isEmpty()) {
             MessageService.send(sender, MessageConfig.getInstance().getNoWarps());

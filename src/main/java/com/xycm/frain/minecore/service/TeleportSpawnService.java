@@ -10,7 +10,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class TeleportSpawnService {
 
-    public static void teleport(CommandSender sender, String target) {
+    public void teleport(CommandSender sender, String target) {
         if (target == null) {
             if (sender instanceof Player player) {
                 teleportSelf(player);
@@ -27,12 +27,12 @@ public class TeleportSpawnService {
         }
     }
 
-    private static void teleportSelf(Player player) {
+    private void teleportSelf(Player player) {
         player.teleport(MainConfig.getInstance().getSpawn().getLocation());
         MessageService.send(player, MessageConfig.getInstance().getSpawnSuccess());
     }
 
-    private static void teleportOther(CommandSender sender, Player player) {
+    private void teleportOther(CommandSender sender, Player player) {
         player.teleport(MainConfig.getInstance().getSpawn().getLocation());
         MessageService.send(sender, MessageConfig.getInstance().getSpawnOthers(), "{player}", player.getName());
     }

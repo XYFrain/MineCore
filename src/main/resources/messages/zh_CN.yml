@@ -45,6 +45,9 @@ vanish-disabled: "<red>隐身模式已关闭"
 vanish-enabled-others: "<green>已为 {player} 开启隐身模式"
 vanish-disabled-others: "<red>已为 {player} 关闭隐身模式"
 
+# 建筑模式
+build-mode-enabled: "<green>建筑模式已开启，持续 {time} 分钟"
+
 # 用法
 usage: "<red>用法：{usage}"
 

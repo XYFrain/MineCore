@@ -9,7 +9,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class TeleportBackService {
 
-    public static void execute(Player player) {
+    public void execute(Player player) {
         if (!DataManager.hasBackLocation(player.getUniqueId())) {
             MessageService.send(player, MessageConfig.getInstance().getBackNoLocation());
             return;

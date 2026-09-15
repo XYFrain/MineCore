@@ -9,7 +9,7 @@ import com.xycm.frain.minecore.config.MessageConfig;
 @UtilityClass
 public class PlayerSuicideService {
 
-    public static void execute(Player player) {
+    public void execute(Player player) {
         player.setHealth(0);
         MessageService.send(player, MessageConfig.getInstance().getSuicideSuccess());
     }

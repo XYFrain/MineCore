@@ -9,7 +9,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class TeleportTpHereService {
 
-    public static void teleport(Player player, String target) {
+    public void teleport(Player player, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);
         if (targetPlayer == null) {
             MessageService.send(player, MessageConfig.getInstance().getPlayerNotFound(), "{player}", target);

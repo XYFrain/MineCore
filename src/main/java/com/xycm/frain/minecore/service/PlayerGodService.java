@@ -9,7 +9,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class PlayerGodService {
 
-    public static void toggle(CommandSender sender, String target) {
+    public void toggle(CommandSender sender, String target) {
         if (target == null) {
             if (sender instanceof Player player) {
                 toggleSelf(player);
@@ -26,13 +26,13 @@ public class PlayerGodService {
         }
     }
 
-    private static void toggleSelf(Player player) {
+    private void toggleSelf(Player player) {
         boolean enabled = !player.isInvulnerable();
         player.setInvulnerable(enabled);
         MessageService.send(player, enabled ? MessageConfig.getInstance().getGodEnabled() : MessageConfig.getInstance().getGodDisabled());
     }
 
-    private static void toggleOther(CommandSender sender, Player player) {
+    private void toggleOther(CommandSender sender, Player player) {
         boolean enabled = !player.isInvulnerable();
         player.setInvulnerable(enabled);
         MessageService.send(sender, enabled ? MessageConfig.getInstance().getGodEnabledOthers() : MessageConfig.getInstance().getGodDisabledOthers(), "{player}", player.getName());

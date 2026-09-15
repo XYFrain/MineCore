@@ -8,6 +8,7 @@ import com.xycm.frain.minecore.service.PlayerFlyService;
 import com.xycm.frain.minecore.service.PlayerGamemodeService;
 import com.xycm.frain.minecore.service.PlayerGodService;
 import com.xycm.frain.minecore.service.PlayerHealService;
+import com.xycm.frain.minecore.service.PlayerBuildService;
 import com.xycm.frain.minecore.service.PlayerSuicideService;
 import com.xycm.frain.minecore.service.PlayerVanishService;
 import com.xycm.frain.minecore.service.TeleportBackService;
@@ -34,6 +35,7 @@ public class MainCommand {
         if (!hasExtraArgs) {
             sender.sendMessage("""
                     === MineCore 帮助 ===
+                    /minecore build <分钟> - 开启建筑模式
                     /minecore fly [玩家] - 切换飞行模式
                     /minecore god [玩家] - 切换无敌模式
                     /minecore heal [玩家] - 恢复生命值
@@ -54,6 +56,14 @@ public class MainCommand {
         } else {
             MessageService.send(sender, MessageConfig.getInstance().getExceptionUnknownCommand());
         }
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
+    @Subcommand("build")
+    @CommandPermission("minecore.player.build")
+    @Description("开启建筑模式")
+    public void onBuild(Player player, int time) {
+        PlayerBuildService.execute(player, time);
     }
 
     //------------------------------------------------------------------------------------------------------------------

@@ -9,7 +9,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class PlayerFlyService {
 
-    public static void toggle(CommandSender sender, String target) {
+    public void toggle(CommandSender sender, String target) {
         if (target == null) {
             if (sender instanceof Player player) {
                 toggleSelf(player);
@@ -26,13 +26,13 @@ public class PlayerFlyService {
         }
     }
 
-    private static void toggleSelf(Player player) {
+    private void toggleSelf(Player player) {
         boolean enabled = !player.getAllowFlight();
         player.setAllowFlight(enabled);
         MessageService.send(player, enabled ? MessageConfig.getInstance().getFlyEnabled() : MessageConfig.getInstance().getFlyDisabled());
     }
 
-    private static void toggleOther(CommandSender sender, Player player) {
+    private void toggleOther(CommandSender sender, Player player) {
         boolean enabled = !player.getAllowFlight();
         player.setAllowFlight(enabled);
         MessageService.send(sender, enabled ? MessageConfig.getInstance().getFlyEnabledOthers() : MessageConfig.getInstance().getFlyDisabledOthers(), "{player}", player.getName());

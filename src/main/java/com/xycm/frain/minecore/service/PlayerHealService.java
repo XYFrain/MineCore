@@ -10,7 +10,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class PlayerHealService {
 
-    public static void execute(CommandSender sender, String target) {
+    public void execute(CommandSender sender, String target) {
         if (target == null) {
             if (sender instanceof Player player) {
                 executeSelf(player);
@@ -27,13 +27,13 @@ public class PlayerHealService {
         }
     }
 
-    private static void executeSelf(Player player) {
+    private void executeSelf(Player player) {
         double max = player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
         player.setHealth(max);
         MessageService.send(player, MessageConfig.getInstance().getHealSuccess());
     }
 
-    private static void executeOther(CommandSender sender, Player player) {
+    private void executeOther(CommandSender sender, Player player) {
         double max = player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
         player.setHealth(max);
         MessageService.send(sender, MessageConfig.getInstance().getHealOthers(), "{player}", player.getName());

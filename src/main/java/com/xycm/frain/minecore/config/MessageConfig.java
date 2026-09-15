@@ -55,6 +55,8 @@ public class MessageConfig {
     private String vanishDisabled = "";
     private String vanishEnabledOthers = "";
     private String vanishDisabledOthers = "";
+    // 建筑模式
+    private String buildModeEnabled = "";
     // 用法
     private String usage = "";
     // 家
