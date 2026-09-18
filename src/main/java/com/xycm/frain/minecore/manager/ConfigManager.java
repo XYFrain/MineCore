@@ -16,14 +16,12 @@ public class ConfigManager {
         loadMainConfig();
         loadMessageConfig();
         DataManager.loadWarpData();
-        MineCore.getInstance().getLogger().info("配置已加载");
     }
 
     public void reload() {
         loadMainConfig();
         loadMessageConfig();
         DataManager.loadWarpData();
-        MineCore.getInstance().getLogger().info("配置已重载");
     }
 
     //------------------------------------------------------------------------------------------------------------------
