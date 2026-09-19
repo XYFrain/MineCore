@@ -7,7 +7,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
 public class BackListener implements Listener {
-
     @EventHandler
     public void onTeleport(PlayerTeleportEvent event) {
         DataManager.setBackLocation(event.getPlayer().getUniqueId(), event.getFrom());

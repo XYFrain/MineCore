@@ -10,7 +10,6 @@ import java.util.UUID;
 
 @UtilityClass
 public class PlayerBuildService {
-
     private final Map<UUID, Long> playerBuildModeRegistry = new HashMap<>();
 
     public void execute(Player player, int time) {

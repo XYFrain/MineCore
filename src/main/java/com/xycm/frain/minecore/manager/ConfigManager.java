@@ -7,11 +7,8 @@ import com.xycm.frain.minecore.config.MessageConfig;
 import lombok.experimental.UtilityClass;
 import java.io.File;
 
-
 @UtilityClass
 public class ConfigManager {
-
-    //------------------------------------------------------------------------------------------------------------------
     public void init() {
         loadMainConfig();
         loadMessageConfig();

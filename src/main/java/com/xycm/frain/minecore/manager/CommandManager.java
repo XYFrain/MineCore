@@ -10,7 +10,6 @@ import revxrsal.commands.bukkit.actor.BukkitCommandActor;
 
 @UtilityClass
 public class CommandManager {
-
     public void register() {
         Lamp<BukkitCommandActor> commandFramework = BukkitLamp.builder(MineCore.getInstance())
                 .exceptionHandler(ExceptionHandler.instance)

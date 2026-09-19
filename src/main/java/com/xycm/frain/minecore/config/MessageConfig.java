@@ -9,11 +9,9 @@ import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
 import lombok.Getter;
 import java.io.File;
 
-
 @ConfigSerializable
 @Getter
 public class MessageConfig {
-
     @Getter
     private static MessageConfig instance = new MessageConfig();
     private MessageConfig() {}
@@ -82,13 +80,12 @@ public class MessageConfig {
     private String exceptionInvalidInteger = "";
     private String exceptionInvalidDecimal = "";
     private String exceptionCommandError = "";
-    //------------------------------------------------------------------
 
+    //------------------------------------------------------------------
     public static void load(File file) {
         try {
             YamlConfigurationLoader loader = YamlConfigurationLoader.builder()
                     .path(file.toPath())
-                    .headerMode(HeaderMode.PRESERVE)
                     .build();
             ConfigurationNode root = loader.load();
             MessageConfig loaded = root.get(MessageConfig.class);

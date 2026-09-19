@@ -6,9 +6,7 @@ import com.xycm.frain.minecore.manager.ListenerManager;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 
-
 public final class MineCore extends JavaPlugin {
-
     @Getter
     private static MineCore instance;
 

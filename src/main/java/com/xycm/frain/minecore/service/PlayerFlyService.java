@@ -8,7 +8,6 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class PlayerFlyService {
-
     public void toggle(CommandSender sender, String target) {
         if (target == null) {
             if (sender instanceof Player player) {

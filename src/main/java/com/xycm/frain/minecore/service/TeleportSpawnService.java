@@ -9,7 +9,6 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class TeleportSpawnService {
-
     public void teleport(CommandSender sender, String target) {
         if (target == null) {
             if (sender instanceof Player player) {

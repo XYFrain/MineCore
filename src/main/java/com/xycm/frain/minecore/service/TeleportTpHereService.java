@@ -5,10 +5,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import lombok.experimental.UtilityClass;
 
-
 @UtilityClass
 public class TeleportTpHereService {
-
     public void teleport(Player player, String target) {
         Player targetPlayer = Bukkit.getPlayer(target);
         if (targetPlayer == null) {

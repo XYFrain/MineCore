@@ -10,7 +10,6 @@ import java.util.List;
 
 @UtilityClass
 public class TeleportWarpService {
-
     public void teleport(Player player, String name) {
         if (name == null) {
             list(player);

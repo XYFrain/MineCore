@@ -7,7 +7,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerDataListener implements Listener {
-
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         DataManager.loadPlayerData(event.getPlayer().getUniqueId());

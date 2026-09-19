@@ -16,7 +16,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.vehicle.VehicleDestroyEvent;
 
 public class PlayerBuildListener implements Listener {
-
     @EventHandler // 放置
     public void onPlace(BlockPlaceEvent event) {
         if (!PlayerBuildService.isEnabled(event.getPlayer())) event.setCancelled(true);

@@ -8,7 +8,6 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class PlayerVanishService {
-
     public void toggle(CommandSender sender, String target) {
         if (target == null) {
             if (sender instanceof Player player) {

@@ -8,11 +8,8 @@ import lombok.experimental.UtilityClass;
 import java.util.List;
 import java.util.UUID;
 
-
 @UtilityClass
 public class TeleportHomeService {
-
-
     public void teleport(Player player, String name) {
         UUID uuid = player.getUniqueId();
         if (name == null) {

@@ -7,9 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
-
 public class SpawnListener implements Listener {
-
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Location spawn = MainConfig.getInstance().getSpawn().getLocation();

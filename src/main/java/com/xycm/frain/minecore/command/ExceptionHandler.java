@@ -8,9 +8,7 @@ import revxrsal.commands.bukkit.exception.SenderNotPlayerException;
 import revxrsal.commands.exception.*;
 import revxrsal.commands.node.ParameterNode;
 
-
 public final class ExceptionHandler extends BukkitExceptionHandler {
-
     public static final ExceptionHandler instance = new ExceptionHandler();
 
     @Override

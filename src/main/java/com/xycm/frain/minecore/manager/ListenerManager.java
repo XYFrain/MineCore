@@ -12,7 +12,6 @@ import org.bukkit.plugin.PluginManager;
 
 @UtilityClass
 public class ListenerManager {
-
     public void register() {
         Bukkit.getPluginManager().registerEvents(new PlayerDataListener(), MineCore.getInstance());
         Bukkit.getPluginManager().registerEvents(new SpawnListener(), MineCore.getInstance());

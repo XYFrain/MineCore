@@ -14,7 +14,6 @@ import java.util.*;
 
 @UtilityClass
 public class DataManager {
-
     private final File playerDataDir = new File(MineCore.getInstance().getDataFolder(), "userdata");
     private final File warpDataFile = new File(MineCore.getInstance().getDataFolder(), "warps.yml");
 

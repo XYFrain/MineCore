@@ -10,7 +10,6 @@ import java.util.UUID;
 
 @Data
 public class PlayerData {
-
     @NonNull
     private final UUID uuid;
     private final Map<String, Location> homes = new LinkedHashMap<>();

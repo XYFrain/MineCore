@@ -9,7 +9,6 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class PlayerHealService {
-
     public void execute(CommandSender sender, String target) {
         if (target == null) {
             if (sender instanceof Player player) {

@@ -26,7 +26,6 @@ public class MainConfig {
         try {
             YamlConfigurationLoader loader = YamlConfigurationLoader.builder()
                     .path(file.toPath())
-                    .headerMode(HeaderMode.PRESERVE)
                     .build();
             ConfigurationNode root = loader.load();
             MainConfig loaded = root.get(MainConfig.class);

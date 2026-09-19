@@ -11,7 +11,6 @@ import java.util.Locale;
 
 @UtilityClass
 public class PlayerGamemodeService {
-
     public void change(CommandSender sender, String gamemode, String target) {
         GameMode resolved = switch (gamemode.toLowerCase(Locale.ROOT)) {
             case "survival", "0" -> GameMode.SURVIVAL;

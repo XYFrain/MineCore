@@ -7,7 +7,6 @@ import org.bukkit.command.CommandSender;
 
 @UtilityClass
 public class ServerReloadService {
-
     public void execute(CommandSender sender) {
         ConfigManager.reload();
         MessageService.send(sender, MessageConfig.getInstance().getReloadSuccess());
